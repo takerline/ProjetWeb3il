@@ -1,0 +1,10 @@
+FROM nginx:alpine
+
+# Copier la configuration de Nginx
+#COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# Copiez les fichiers du site web
+COPY . /var/www/html
+
+# Définir le répertoire de travail
+WORKDIR /var/www/html
