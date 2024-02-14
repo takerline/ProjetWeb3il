@@ -1,31 +1,6 @@
 
 
 
-
-
-
-<?php
-// index.php
-require_once 'config/database.php';
-require_once 'controllers/LoginController.php';
-
-$action = $_GET['action'] ?? '';
-
-switch ($action) {
-    case 'login':
-        $controller = new LoginController($pdo);
-        $controller->login();
-        break;
-    default:
-        // Afficher la vue de connexion par défaut
-        require_once 'views/loginView.php';
-}
-
-
-
-
-
-/*
 <!doctype html>
 <html lang="fr">
   <head>
@@ -47,13 +22,14 @@ switch ($action) {
   
     <div class="container">
 
-      <form class="needs-validation" action="controller/LoginController.php" novalidate="" method="POST">
+      <form class="needs-validation" action="index.php?action=login" novalidate="" method="POST">
           <div class="row g-3">
 
             <div class="col-12">
               <label for="username" class="form-label">Identifiant</label>
               <div class="input-group has-validation">
-                <input type="text" class="form-control" id="username" placeholder="Identifiant" required="">
+              
+                <input type="text" class="form-control" name="username" id="username" placeholder="Identifiant" required="">
                 <div class="invalid-feedback">
                   Votre identifiant est nécessaire
                 </div>
@@ -62,7 +38,7 @@ switch ($action) {
 
             <div class="col-12">
               <label for="password" class="form-label">Mot de passe </label>
-              <input type="password" class="form-control" id="password" placeholder="Mot de passe">
+              <input type="password" class="form-control" id="password" name="password" placeholder="Mot de passe">
               <div class="invalid-feedback">
                 Veuillez entrer votre mot de passe
               </div>
@@ -81,8 +57,8 @@ switch ($action) {
 	
 	
     <?php
-      include 'Views\footer.php'
+      include 'footer.php'
     ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
   </body>
-</html>*/
+</html>
