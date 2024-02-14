@@ -13,11 +13,15 @@ class LoginController {
     public function login() {
         $username = $_POST['username'] ?? '';
         $password = $_POST['password'] ?? '';
+        error_log("Username: $username"); // Vérifiez les logs de votre serveur web
+        error_log("Password: $password");
+
 
         if ($user = $this->userModel->checkCredentials($username, $password)) {
             header("Location: menu.php"); // Redirection vers la page de menu
             exit;
         } else {
+            
             echo "Identifiants incorrects. Veuillez réessayer.";
         }
     }

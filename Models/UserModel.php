@@ -9,12 +9,13 @@ class UserModel {
     }
 
     public function checkCredentials($username, $password) {
-        $sql = "SELECT * FROM Personne WHERE username = :username"; // Assurez-vous que la table et les colonnes correspondent
+        $sql = "SELECT * FROM personne WHERE username = :username"; // Assurez-vous que la table et les colonnes correspondent
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute(['username' => $username]);
         $user = $stmt->fetch();
 
-        if ($user && password_verify($password, $user['password'])) {
+        //if ($user && password_verify($password, $user['password'])) {
+        if ($user && $user['password'] === $password) {
             return $user; // Les identifiants sont corrects
         }
 
