@@ -6,9 +6,10 @@
 
 <?php
 // index.php
+session_start();
 require_once 'config/database.php';
 require_once 'controllers/LoginController.php';
-
+require_once 'controllers/MenuController.php';
 $action = $_GET['action'] ?? '';
 
 switch ($action) {
@@ -16,6 +17,18 @@ switch ($action) {
         $controller = new LoginController($pdo);
         $controller->login();
         break;
+    case 'showMenu':
+          $controller = new MenuController();
+          $controller->showMenu();
+          break;
+    case 'logout':
+            // Détruire la session et rediriger vers la page de connexion
+            session_start();
+            session_unset(); // Supprime toutes les variables de session
+            session_destroy(); // Détruit la session
+            header("Location: index.php");
+            exit;
+        
     default:
         // Afficher la vue de connexion par défaut
         require_once 'views/loginView.php';

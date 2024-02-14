@@ -4,6 +4,7 @@ require_once 'models/UserModel.php';
 require_once 'config/database.php'; // Assurez-vous que ce chemin est correct
 
 class LoginController {
+    
     private $userModel;
 
     public function __construct($pdo) {
@@ -18,7 +19,9 @@ class LoginController {
 
 
         if ($user = $this->userModel->checkCredentials($username, $password)) {
-            header("Location: menu.php"); // Redirection vers la page de menu
+            // ou toute autre information pertinente
+            $_SESSION['username'] = $username;
+            header("Location: index.php?action=showMenu");// Redirection vers la page de menu
             exit;
         } else {
             
