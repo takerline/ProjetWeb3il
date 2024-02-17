@@ -21,4 +21,23 @@ class UserModel {
 
         return false; // Les identifiants sont incorrects
     }
+    public function getRoleByUserId($userId) {
+        // Vérifier dans la table "clerge"
+        $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM clerge WHERE id = :userId");
+        $stmt->execute(['userId' => $userId]);
+        if ($stmt->fetchColumn() > 0) return 'clerge';
+    
+        // Vérifier dans la table "seigneur"
+        $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM seigneur WHERE id = :userId");
+        $stmt->execute(['userId' => $userId]);
+        if ($stmt->fetchColumn() > 0) return 'seigneur';
+    
+        // Vérifier dans la table "tieretat"
+        $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM tieretat WHERE id = :userId");
+        $stmt->execute(['userId' => $userId]);
+        if ($stmt->fetchColumn() > 0) return 'tieretat';
+    
+        return null; // Retourne null si l'utilisateur n'est trouvé dans aucune table
+    }
+    
 }

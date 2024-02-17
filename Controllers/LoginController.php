@@ -14,6 +14,7 @@ class LoginController {
     public function login() {
         $username = $_POST['username'] ?? '';
         $password = $_POST['password'] ?? '';
+       
         error_log("Username: $username"); // Vérifiez les logs de votre serveur web
         error_log("Password: $password");
 
@@ -21,6 +22,8 @@ class LoginController {
         if ($user = $this->userModel->checkCredentials($username, $password)) {
             // ou toute autre information pertinente
             $_SESSION['username'] = $username;
+            $_SESSION['userId'] = $user['id'];
+            $_SESSION['role'] = $this->userModel->getRoleByUserId($user['id']);
             header("Location: index.php?action=showMenu");// Redirection vers la page de menu
             exit;
         } else {

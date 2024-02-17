@@ -12,12 +12,33 @@
     <title>Menu</title>
 </head>
 <body>
-<p>Bienvenue, <?php echo htmlspecialchars($_SESSION['username']); ?>!</p>
+
+
+<?php
+if (isset($_SESSION['role'])) {
+    echo "<p>Rôle : " . htmlspecialchars($_SESSION['role']) . "</p>";
+    // Afficher des éléments spécifiques basés sur le rôle
+    if ($_SESSION['role'] == 'clerge') {
+        // Afficher des informations spécifiques au clergé
+    } elseif ($_SESSION['role'] == 'seigneur') {
+        // Afficher des informations spécifiques aux seigneurs
+    } elseif ($_SESSION['role'] == 'tieretat') {
+        ?><a href="index.php?action=showDemandes">Mes impots</a><?php
+        // Afficher des informations spécifiques au tiers état
+    }
+}
+?>
+
+
+
+
+<p>Bienvenue, <?php echo htmlspecialchars($_SESSION['userId']); ?>!</p>
 
     
     <h1>Menu Principal</h1>
+    <p><?php echo $_SESSION['userId']; ?></p>
     <ul>
-        <li><a href="index.php?action=page1">Page 1</a></li>
+        <li><a href="index.php?action=compte">Mon Domaine ( mon compte)</a></li>
         <li><a href="index.php?action=page2">Page 2</a></li>
         <li><a href="index.php?action=logout">Déconnexion</a></li>
     </ul>

@@ -10,8 +10,12 @@ session_start();
 require_once 'config/database.php';
 require_once 'controllers/LoginController.php';
 require_once 'controllers/MenuController.php';
+require_once 'controllers/CompteController.php';
+require_once 'controllers/BienController.php';
+require_once 'controllers/DemandeController.php';
 $action = $_GET['action'] ?? '';
-
+$Bcontroller = new BienController($pdo);
+$demandeController = new DemandeController($pdo);
 switch ($action) {
     case 'login':
         $controller = new LoginController($pdo);
@@ -28,8 +32,37 @@ switch ($action) {
             session_destroy(); // Détruit la session
             header("Location: index.php");
             exit;
+    case 'compte':
+      $controller = new CompteController($pdo);
+      $controller->showPage();
+      break;
+    case 'editBienForm':
+    
+       
+        $Bcontroller->editBienForm();
         
+        break;
+    case 'updateBien':
+     
+      $Bcontroller->updateBien();
+        break;
+
+        case 'showDemandes':
+          $demandeController->showDemandes();
+          break;
+      case 'repondreDemande':
+        echo "ok";
+          $demandeId = $_GET['demandeId'] ?? null;
+          if ($demandeId) {
+              $demandeController->repondreDemande($demandeId);
+          }
+          break;
+
+
+
+
     default:
+    
         // Afficher la vue de connexion par défaut
         require_once 'views/loginView.php';
 }
