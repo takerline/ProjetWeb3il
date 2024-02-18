@@ -19,8 +19,13 @@ if (isset($_SESSION['role'])) {
     echo "<p>Rôle : " . htmlspecialchars($_SESSION['role']) . "</p>";
     // Afficher des éléments spécifiques basés sur le rôle
     if ($_SESSION['role'] == 'clerge') {
+
+
+
+        
         // Afficher des informations spécifiques au clergé
     } elseif ($_SESSION['role'] == 'seigneur') {
+        ?><a href="index.php?action=SshowDemandes">Mes impots</a><?php
         // Afficher des informations spécifiques aux seigneurs
     } elseif ($_SESSION['role'] == 'tieretat') {
         ?><a href="index.php?action=showDemandes">Mes impots</a><?php

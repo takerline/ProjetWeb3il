@@ -13,9 +13,12 @@ require_once 'controllers/MenuController.php';
 require_once 'controllers/CompteController.php';
 require_once 'controllers/BienController.php';
 require_once 'controllers/DemandeController.php';
+require_once 'controllers/DemandeControllerSeigneur.php';
+
 $action = $_GET['action'] ?? '';
 $Bcontroller = new BienController($pdo);
 $demandeController = new DemandeController($pdo);
+$SdemandeController = new DemandeControllerSeigneur($pdo);
 switch ($action) {
     case 'login':
         $controller = new LoginController($pdo);
@@ -47,17 +50,19 @@ switch ($action) {
       $Bcontroller->updateBien();
         break;
 
-        case 'showDemandes':
+    case 'showDemandes':
           $demandeController->showDemandes();
           break;
-      case 'repondreDemande':
+    case 'repondreDemande':
         echo "ok";
           $demandeId = $_GET['demandeId'] ?? null;
           if ($demandeId) {
               $demandeController->repondreDemande($demandeId);
           }
           break;
-
+    case 'SshowDemandes':
+      $SdemandeController->showDemandes();
+      break;
 
 
 

@@ -1,5 +1,5 @@
 <?php
-class DemandeModel {
+class DemandeModelSeigneur {
     private $pdo;
 
     public function __construct($pdo) {
@@ -7,7 +7,7 @@ class DemandeModel {
     }
 
     public function getAllDemandes($userId) {
-        $stmt = $this->pdo->prepare("SELECT * FROM impotseigneur WHERE idTier = :userID");
+        $stmt = $this->pdo->prepare("SELECT * FROM impotseigneur WHERE idSeigneur = :userID");
         $stmt->execute(['userID' => $userId]);
         return $stmt->fetchAll();
     }

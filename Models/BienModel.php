@@ -11,10 +11,10 @@ class BienModel {
         $stmt->execute(['userId' => $userId]);
         return $stmt->fetchAll();
     }
-    public function updateBien($id, $blé, $denier) {
-        $sql = "UPDATE bien SET blé = :blé, denier = :denier WHERE id = :id";
+    public function updateBien($id, $ble, $denier) {
+        $sql = "UPDATE bien SET blé = :ble, denier = :denier WHERE id = :id";
         $stmt = $this->pdo->prepare($sql);
-        $stmt->execute(['blé' => $blé, 'denier' => $denier, 'id' => $id]);
+        $stmt->execute(['ble' => $ble, 'denier' => $denier, 'id' => $id]);
         return $stmt->rowCount(); // Retourne le nombre de lignes affectées
     }
     public function getBienById($id) {

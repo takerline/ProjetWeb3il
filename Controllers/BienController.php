@@ -18,11 +18,12 @@ class BienController {
     }
 
     public function updateBien() {
-        $id = $_POST['id'];
-        $nom = $_POST['nom'];
-        $description = $_POST['description'];
+        $id = $_SESSION['userId'];
+
+        $ble = $_POST['blé'];
+        $denier = $_POST['denier'];
         // Récupérez les autres champs comme nécessaire
-        $this->bienModel->updateBien($id, $nom, $description, $autresChamps);
+        $this->bienModel->updateBien($id, $ble, $denier);
         // Redirection ou affichage d'un message de succès
         header("Location: index.php?action=showMenu");
     }
