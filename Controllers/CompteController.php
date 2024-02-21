@@ -10,7 +10,6 @@ class CompteController {
     }
 
     public function showPage() {
-        session_start();
         $userId = $_SESSION['userId'] ?? null;
         if ($userId) {
             $biens = $this->bienModel->getBiensByUserId($userId);
@@ -20,28 +19,4 @@ class CompteController {
         }
     }
 
-
-
-
-
-
-
-
-
-
-   /*
-    public function __construct() {
-
-    
-        
-        if (!isset($_SESSION['username'])) { // Supposons que 'user_id' est défini lors de la connexion
-            header("Location: index.php");
-            exit;
-        }
-    }
-
-    public function showPage() {
-        require_once 'views/compteView.php';
-        
-    }*/
 }

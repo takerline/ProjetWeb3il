@@ -12,12 +12,8 @@ class DemandeModel {
         return $stmt->fetchAll();
     }
 
-    // Supposons que chaque demande a une liste de biens associée
+
     public function transfertBiens($demandeId,$userId) {
-        // Logique pour transférer les biens de votre inventaire vers celui de l'utilisateur ciblé
-        // Cette méthode nécessitera des détails supplémentaires en fonction de la structure de votre base de données
-
-
 
         try {
             $this->pdo->beginTransaction();
@@ -31,20 +27,13 @@ class DemandeModel {
                 throw new Exception("Demande non trouvée.");
             }
     
-            // Supposons que vous avez une logique pour identifier les biens du demandeur
-            // et que $userId est l'ID du demandeur
-    
-            // Mise à jour des biens du demandeur (décrémentation)
-            // $stmt = $this->pdo->prepare("UPDATE bien SET ... WHERE user_id = :userId AND ...");
-            $stmt = $this->pdo->prepare("UPDATE bien SET blé = blé - :ble, denier = denier - :denier WHERE id = :idSeigneur");
+            $stmt = $this->pdo->prepare("UPDATE bien SET blé = blé - :ble, impotPaye = true, denier = denier - :denier WHERE id = :idSeigneur");
             $stmt->execute([
                 'ble' => $demande['blé'],
                 'denier' => $demande['denier'],
                 'idSeigneur' => $userId
             ]);
     
-
-            // Mise à jour des biens du destinataire (incrémentation)
             $stmt = $this->pdo->prepare("UPDATE bien SET blé = blé + :ble, denier = denier + :denier WHERE id = :idSeigneur");
             $stmt->execute([
                 'ble' => $demande['blé'],

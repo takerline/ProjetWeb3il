@@ -10,8 +10,7 @@ class BienController {
     }
 
     public function editBienForm() {
-        // Récupérer les informations du bien pour les afficher dans le formulaire
-       
+
         $id = $_SESSION['userId'];
         $bien = $this->bienModel->getBienById($id);
         require_once 'views/declarationView.php';
@@ -25,6 +24,6 @@ class BienController {
         // Récupérez les autres champs comme nécessaire
         $this->bienModel->updateBien($id, $ble, $denier);
         // Redirection ou affichage d'un message de succès
-        header("Location: index.php?action=showMenu");
+        header("Location: index.php?action=compte");
     }
 }

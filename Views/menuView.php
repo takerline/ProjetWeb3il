@@ -1,51 +1,30 @@
-<!-- views/menuView.php -->
 
-
-<?php if (!isset($_SESSION['username'])): header("Location: index.php"); ?>
-   
-    
-<?php endif; ?>
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Menu</title>
-</head>
-<body>
-
-
-<?php
-if (isset($_SESSION['role'])) {
-    echo "<p>Rôle : " . htmlspecialchars($_SESSION['role']) . "</p>";
-    // Afficher des éléments spécifiques basés sur le rôle
-    if ($_SESSION['role'] == 'clerge') {
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dime : Menu</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  </head>
+  <body>
 
 
 
-        
-        // Afficher des informations spécifiques au clergé
-    } elseif ($_SESSION['role'] == 'seigneur') {
-        ?><a href="index.php?action=SshowDemandes">Mes impots</a><?php
-        // Afficher des informations spécifiques aux seigneurs
-    } elseif ($_SESSION['role'] == 'tieretat') {
-        ?><a href="index.php?action=showDemandes">Mes impots</a><?php
-        // Afficher des informations spécifiques au tiers état
-    }
-}
-?>
+    <?php
+      include 'header.php'
+    ?>
 
-
-
-
-<p>Bienvenue, <?php echo htmlspecialchars($_SESSION['userId']); ?>!</p>
+    <div class="container">
+    <h1>Accueil</h1>
+    <br/>
+    <h2>Bienvenue, <?php echo htmlspecialchars($_SESSION['username']); ?> !</h2>
 
     
-    <h1>Menu Principal</h1>
-    <p><?php echo $_SESSION['userId']; ?></p>
-    <ul>
-        <li><a href="index.php?action=compte">Mon Domaine ( mon compte)</a></li>
-        <li><a href="index.php?action=page2">Page 2</a></li>
-        <li><a href="index.php?action=logout">Déconnexion</a></li>
-    </ul>
+
+    </div>
+    <?php
+      include 'footer.php'
+    ?>
 </body>
 </html>
